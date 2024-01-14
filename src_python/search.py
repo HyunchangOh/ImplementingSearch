@@ -111,8 +111,11 @@ def suffix_search(reference_filename:str="hg38_partial.fasta.gz", reads_filename
     reference_sequence = import_fasta_seq_from(reference_filename)
     assert len(reference_sequence)==1, "Reference file contains more than one record"
     reference_sequence = reference_sequence[0]
+    
+    start = time.time()
     suffix_array = iv.create_suffixarray(reference_sequence)
-
+    end = time.time()
+    print("Suffix Array Constructed Time:"+str(end-start))
     read_sequences = import_fasta_seq_from(reads_filename)
 
     searches = []
@@ -127,5 +130,45 @@ def suffix_search(reference_filename:str="hg38_partial.fasta.gz", reads_filename
 
 
 #1-4 Benchmark (runtime and memory) your solutions for 1’000, 10’000, 100’000 1’000’000 queries of length 100.
+import time
+def measure_time(query_size:int,length_size:int,suffix:bool=True):
+    """
+    :param query_size: number of searches made.
+    :param length_size: length of the read
+    :param suffix: True = Suffix array, False = naive
+    :returns: amount of time elapsed during the execution of search
+    """
+    start = time.time()
+    if suffix:
+        suffix_search(reads_filename="illumina_reads_%d.fasta.gz"%(length_size),queries=query_size)
+    else:
+        naive_search(reads_filename="illumina_reads_%d.fasta.gz"%(length_size),queries=query_size)
+    end=time.time()
+    return end-start
 
 #1-5 Benchmark (runtime) queries of the length 40, 60, 80, and 100 with a suitable number of queries.
+#Same function from 1-4 will be used for this task
+
+a = input("Welcome to ImplementSearch!!! Press Enter to Continue.")
+b = input("""
+    Choose what you want to do.
+    a. Perform Task 1-4 (automatic)
+    b. Perform Task 1-5 (automatic)
+    c. Perform User-Defined Tests (not implemented yet)
+""")
+if b.lower()=="a":
+    queries = [1000,10000,100000,1000000]
+    for q in queries:
+        print("Query Size is: "+str(q))
+        print("Suffix Array Search Time:")
+        print(measure_time(q,100,True))
+        print("Naive Search Time:")
+        print(measure_time(q,100,False))
+if b.lower()=="b":
+    lengths = [40,60,80,100]
+    for l in lengths:
+        print("Length Size is: "+str(l))
+        print("Suffix Array Search Time:")
+        print(measure_time(1000,l,True))
+        print("Naive Search Time:")
+        print(measure_time(1000,l,False))
