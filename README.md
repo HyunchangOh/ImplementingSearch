@@ -1,4 +1,5 @@
 # ImplementingSearch
+### Team "SchnappiDasKleineKrokodil"
 
 Group 1: Antonio Alfaro de Prado, Eleanor Alspaugh, Hyunchang Oh
 
