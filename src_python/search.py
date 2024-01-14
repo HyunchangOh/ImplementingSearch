@@ -154,7 +154,7 @@ b = input("""
     Choose what you want to do.
     a. Perform Task 1-4 (automatic)
     b. Perform Task 1-5 (automatic)
-    c. Perform User-Defined Tests (not implemented yet)
+    c. Try Small Sized Queries (automatic, and implemented!)
 """)
 if b.lower()=="a":
     queries = [1000,10000,100000,1000000]
@@ -172,3 +172,8 @@ if b.lower()=="b":
         print(measure_time(1000,l,True))
         print("Naive Search Time:")
         print(measure_time(1000,l,False))
+if c.lower()=="c":
+    print("Suffix Array Search Results: ")
+    print(suffix_search(queries=20))
+    print("Naive Search Results: ")
+    print(naive_search(queries=20))

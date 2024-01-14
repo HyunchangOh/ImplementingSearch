@@ -1,6 +1,7 @@
 # ImplementingSearch
 
 This is an exercise to demonstrate the power of Suffix-Array and FM-Index based searching.
+Visit our Repository at https://github.com/HyunchangOh/ImplementingSearch
 
 ## Dependencies
 1. This program runs on Python. In order to install python, please refer to https://www.python.org/downloads/
@@ -14,7 +15,7 @@ Press Enter after Welcome message.
 There are three modes:
 a. Perform Task 1-4
 b. Perform Task 1-5
-c. User Defined Tests (Not implemented yet)
+c. Perform small-scale search (20 queries) and displays the results
 
 Choose the task you wish to perform. All results will be printed in command line.
 
