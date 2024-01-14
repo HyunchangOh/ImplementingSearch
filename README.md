@@ -1,5 +1,7 @@
 # ImplementingSearch
 
+Group 1: Antonio Alfaro de Prado, Eleanor Alspaugh, Hyunchang Oh
+
 This is an exercise to demonstrate the power of Suffix-Array and FM-Index based searching.
 Visit our Repository at https://github.com/HyunchangOh/ImplementingSearch
 

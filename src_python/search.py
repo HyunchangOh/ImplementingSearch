@@ -151,6 +151,7 @@ def measure_time(query_size:int,length_size:int,suffix:bool=True):
 
 a = input("Welcome to ImplementSearch!!! Press Enter to Continue.")
 b = input("""
+    Copyright(c) Group 1: Antonio Alfaro de Prado, Eleanor Alspaugh, Hyunchang Oh
     Choose what you want to do.
     a. Perform Task 1-4 (automatic)
     b. Perform Task 1-5 (automatic)
