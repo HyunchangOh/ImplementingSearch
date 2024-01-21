@@ -30,6 +30,7 @@ def naive_search_single(substring:str, string:str):
         string=string.replace(substring,"%"*len(substring),1)
     return store
 
+@profile
 def naive_search(reference_filename:str="hg38_partial.fasta.gz", reads_filename:str="illumina_reads_100.fasta.gz", queries:int=None):
     """
     :param reference_filename: name of the file in the 'data' directory that stores the reference sequence. This should have only one record in the file.
@@ -101,6 +102,7 @@ def suffix_search_single(substring, suffix_array, reference):
     answer.sort()
     return answer
 
+@profile
 def suffix_search(reference_filename:str="hg38_partial.fasta.gz", reads_filename:str="illumina_reads_100.fasta.gz", queries:int=None):
     """
     :param reference_filename: name of the file in the 'data' directory that stores the reference sequence. This should have only one record in the file.
@@ -154,6 +156,7 @@ def measure_time(query_size:int,length_size:int,suffix:bool=True, fm:bool = Fals
 
 
 #2-2 fmindex based search
+@profile
 def fmindex_search(reference_filename:str="hg38_partial.fasta.gz", reads_filename:str="illumina_reads_100.fasta.gz", queries:int=None):
     """
     :param reference_filename: name of the file in the 'data' directory that stores the reference sequence. This should have only one record in the file.
@@ -191,7 +194,7 @@ def fmindex_search(reference_filename:str="hg38_partial.fasta.gz", reads_filenam
                 searches.append([])
     return searches
 
-
+# %load_ext memory_profiler
 a = input("Welcome to ImplementSearch!!! Press Enter to Continue.")
 b = input("""
     Copyright(c) Group 1: Antonio Alfaro de Prado, Eleanor Alspaugh, Hyunchang Oh
@@ -202,13 +205,21 @@ b = input("""
     c. Try Small Sized Queries (automatic, and implemented!)
 """)
 if b.lower()=="a":
-    queries = [1000,10000,100000,1000000]
+    queries = [10000] #, 100, 1000,10000,100000]
     for q in queries:
         print("Query Size is: "+str(q))
         print("Suffix Array Search Time:")
         print(measure_time(q,100,True))
+        print("-------------------")
+
         print("Naive Search Time:")
         print(measure_time(q,100,False))
+        print("-------------------")
+
+        print("FM Index Search Time:")
+        print(measure_time(q,100,False,True))
+        print("-------------------")
+        print("")
 if b.lower()=="b":
     lengths = [40,60,80,100]
     for l in lengths:
@@ -217,6 +228,8 @@ if b.lower()=="b":
         print(measure_time(1000,l,True))
         print("Naive Search Time:")
         print(measure_time(1000,l,False))
+        print("FM Index Search Time:")
+        print(measure_time(1000,l,False,True))
 if b.lower()=="c":
     print("Suffix Array Search Results: ")
     print(suffix_search(queries=20))
