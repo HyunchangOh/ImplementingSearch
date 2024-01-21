@@ -149,9 +149,50 @@ def measure_time(query_size:int,length_size:int,suffix:bool=True):
 #1-5 Benchmark (runtime) queries of the length 40, 60, 80, and 100 with a suitable number of queries.
 #Same function from 1-4 will be used for this task
 
+
+#2-2 fmindex based search
+def fmindex_search(reference_filename:str="hg38_partial.fasta.gz", reads_filename:str="illumina_reads_100.fasta.gz", queries:int=None):
+    """
+    :param reference_filename: name of the file in the 'data' directory that stores the reference sequence. This should have only one record in the file.
+    :param reads_filename: name of the file in the 'data' directory that stores the reads sequences. This may have very many records.
+    :param queries: if entered, only the first n reads will be searched.
+    :returns: list of int containing the starting indices of each read in the reference. -1 if not found.
+    """
+    reference_sequence = import_fasta_seq_from(reference_filename)
+    assert len(reference_sequence)==1, "Reference file contains more than one record"
+    reference_sequence = reference_sequence[0]
+    
+    start = time.time()
+    fm_index = iv.fmindex([reference_sequence,"ACTG"])
+    end = time.time()
+    print("FM index Constructed in Time:"+str(end-start))
+    read_sequences = import_fasta_seq_from(reads_filename)
+
+    searches = []
+    if queries:
+        for i in range(queries):
+            read = read_sequences[i]    
+            res = fm_index.search(read)
+            if len(res)>0:
+                for i in res:
+                    searches.append([i[1]])
+            else:
+                searches.append([])
+    else:
+        for read in read_sequences:
+            res = fm_index.search(read)
+            if len(res)>0:
+                for i in res:
+                    searches.append([i[1]])
+            else:
+                searches.append([])
+    return searches
+
+
 a = input("Welcome to ImplementSearch!!! Press Enter to Continue.")
 b = input("""
     Copyright(c) Group 1: Antonio Alfaro de Prado, Eleanor Alspaugh, Hyunchang Oh
+    Team "SchnappiDasKleineKrokodil"
     Choose what you want to do.
     a. Perform Task 1-4 (automatic)
     b. Perform Task 1-5 (automatic)
@@ -173,8 +214,10 @@ if b.lower()=="b":
         print(measure_time(1000,l,True))
         print("Naive Search Time:")
         print(measure_time(1000,l,False))
-if c.lower()=="c":
+if b.lower()=="c":
     print("Suffix Array Search Results: ")
     print(suffix_search(queries=20))
     print("Naive Search Results: ")
     print(naive_search(queries=20))
+    print("FM index Search Results: ")
+    print(fmindex_search(queries=20))
