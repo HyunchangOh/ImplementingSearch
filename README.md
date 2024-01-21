@@ -38,6 +38,10 @@ Both searches make use of the 'single' version of their own (suffix_search_singl
 2. Binary search the suffix array to find the 'middle' occurrence of the substring.
 3. Travel upward and downward in the suffixarray to find extra occurrences of the substring.
 
+### Fm Index Search
+1. Construct Fm Index with iv2py library.
+2. Perform search and reorganize format to comply with other search implementations.
+
 ## Benchmark Comparison
 For the query size of 1000,
 Suffix array search took 343.96045565605164 seconds, among which 7.536531209945679 seconds were used for array construction.
