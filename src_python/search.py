@@ -131,15 +131,18 @@ def suffix_search(reference_filename:str="hg38_partial.fasta.gz", reads_filename
 
 #1-4 Benchmark (runtime and memory) your solutions for 1’000, 10’000, 100’000 1’000’000 queries of length 100.
 import time
-def measure_time(query_size:int,length_size:int,suffix:bool=True):
+def measure_time(query_size:int,length_size:int,suffix:bool=True, fm:bool = False):
     """
     :param query_size: number of searches made.
     :param length_size: length of the read
     :param suffix: True = Suffix array, False = naive
+    :param fm: True = perform fmindex search, False = resort to suffix
     :returns: amount of time elapsed during the execution of search
     """
     start = time.time()
-    if suffix:
+    if fm:
+        fmindex_search(reads_filename="illumina_reads_%d.fasta.gz"%(length_size),queries=query_size)
+    elif suffix:
         suffix_search(reads_filename="illumina_reads_%d.fasta.gz"%(length_size),queries=query_size)
     else:
         naive_search(reads_filename="illumina_reads_%d.fasta.gz"%(length_size),queries=query_size)
