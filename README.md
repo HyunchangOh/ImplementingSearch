@@ -47,5 +47,15 @@ For the query size of 1000,
 Suffix array search took 343.96045565605164 seconds, among which 7.536531209945679 seconds were used for array construction.
 Naive Search took 222.48520278930664 seconds.
 
-## Discussion
-It appears Python's native function 'find' is more time-efficient than our implementation of Search with suffix array.
+## Time and Memory Usage Comparison
+For query size of 10,100,1000, the memory usage and computation time of each search method was compared, using python's native time library for computation time and memory-profiler for memory usage.
+For detailed use of memory-profiler library, visit https://pypi.org/project/memory-profiler/
+
+
+### Memory Usage
+![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/55784363-5bbe-4971-ab44-d01480e5e11d)
+Naive search does not generate any additional data structures, so its memory use is the lowest, while Suffix Array uses significantly more memory than FM index.
+
+### Computation Time
+![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/a6964386-2e58-411c-a589-f50922a9c890)
+Of the three algorithms tested between assignments 1 and 2, the FMindex search appears to be the most efficient. One reason for this is its average-case linear time complexity. The FMindex search algorithm also uses a log-based time complexity for encoding of the test while suffix array is not log-based; this makes it faster than suffix array for individual searches. It is based on the Burrows Wheeler Transform (BWT) and suffix array. The FMindex search also has lower time requirements than naive search. The naive search does not require the same pre-processing that FMindex and suffix array require but this pre-processing step reduces downstream processing time during the search.
