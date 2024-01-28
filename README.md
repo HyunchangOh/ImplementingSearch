@@ -6,12 +6,15 @@ Group 1: Antonio Alfaro de Prado, Eleanor Alspaugh, Hyunchang Oh
 This is an exercise to demonstrate the power of Suffix-Array and FM-Index based searching.
 Visit our Repository at https://github.com/HyunchangOh/ImplementingSearch
 
+This implementation was developed and tested on WSL(Ubuntu) on Windows 10. 
+
+# Python Implementation
+C++ follows below.
 ## Dependencies
 1. This program runs on Python. In order to install python, please refer to https://www.python.org/downloads/
 2. This program requires installing the library iv2py. Refer to https://pypi.org/project/iv2py/ for installation.
 
 ## How to Run
-### Python Program
 In the src_python directory, simply run "python search.py" and command-line interface will pop up.
 
 Press Enter after Welcome message.
@@ -23,24 +26,7 @@ c. Perform small-scale search (20 queries) and displays the results
 
 Choose the task you wish to perform. All results will be printed in command line.
 
-### C++ Program
-```
-$ # We are assuming you are in the terminal/console inside the repository folder
-$ mkdir build # creates a folder for our build system
-$ cd build
-$ cmake ..    # configures our build system
-$ make        # builds our software, repeat this command to recompile your software
 
-$ ./bin/naive_search --reference ../data/hg38_partial.fasta --query ../data/illumina_reads_40.fasta --query_ct 100 # calls the code in src/naive_search.cpp
-
-$ ./bin/suffixarray_search --reference ../data/hg38_partial.fasta --query ../data/illumina_reads_40.fasta # calls the code in src/suffixarray_search.cpp
-
-$ ./bin/fmindex_construct --reference ../data/hg38_partial.fasta --index myIndex.index # creates an index, see src/fmindex_construct.cpp
-
-$ ./bin/fmindex_search --index myIndex.index --query ../data/illumina_reads_40.fasta --query_ct 100 --errors 0  # searches by using the fmindex, see src/fmindex_search.cpp
-
-$ ./bin/fmindex_pigeon_search --reference ../data/hg38_partial.fasta --index myIndex.index --query ../data/illumina_reads_40.fasta --query_ct 100 --errors 0  # searches by using the fmindex, see src/fmindex_pigeon_search.cpp
-```
 
 ## Implementation Description
 This program has two ways of search, namely: naive search and suffix search.
@@ -80,6 +66,39 @@ Naive search does not generate any additional data structures, so its memory use
 ![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/a6964386-2e58-411c-a589-f50922a9c890)
 Of the three algorithms tested between assignments 1 and 2, the FMindex search appears to be the most efficient. One reason for this is its average-case linear time complexity. The FMindex search algorithm also uses a log-based time complexity for encoding of the test while suffix array is not log-based; this makes it faster than suffix array for individual searches. It is based on the Burrows Wheeler Transform (BWT) and suffix array. The FMindex search also has lower time requirements than naive search. The naive search does not require the same pre-processing that FMindex and suffix array require but this pre-processing step reduces downstream processing time during the search.
 
+# C++ Program
+## Dependencies
+1. This program runs with Seqan3 and libsufsort, which is already installed in 'lib' subdirectory.
+2. The dependencies, especially seqan3, require specific versions of compilers (and possibly others). Check troubleshooting if you run into errors upon running 'cmake'.
+
+## Implementation Description
+### Naive Search
+
+### Suffix Search
+
+### Fm Index Search
+
+### Pigeonhole Search
+
+## How to Build
+```
+$ # We are assuming you are in the terminal/console inside the repository folder
+$ mkdir build # creates a folder for our build system
+$ cd build
+$ cmake ..    # configures our build system
+$ make        # builds our software, repeat this command to recompile your software
+
+$ ./bin/naive_search --reference ../data/hg38_partial.fasta --query ../data/illumina_reads_40.fasta --query_ct 100 # calls the code in src/naive_search.cpp
+
+$ ./bin/suffixarray_search --reference ../data/hg38_partial.fasta --query ../data/illumina_reads_40.fasta # calls the code in src/suffixarray_search.cpp
+
+$ ./bin/fmindex_construct --reference ../data/hg38_partial.fasta --index myIndex.index # creates an index, see src/fmindex_construct.cpp
+
+$ ./bin/fmindex_search --index myIndex.index --query ../data/illumina_reads_40.fasta --query_ct 100 --errors 0  # searches by using the fmindex, see src/fmindex_search.cpp
+
+$ ./bin/fmindex_pigeon_search --reference ../data/hg38_partial.fasta --index myIndex.index --query ../data/illumina_reads_40.fasta --query_ct 100 --errors 0  # searches by using the fmindex, see src/fmindex_pigeon_search.cpp
+```
+
 ## Troubleshooting
 ### Pushing a Large File to a Github Repo
 If pushing to a github repository returns:
@@ -87,3 +106,32 @@ fatal: the remote end hung up unexpectedly
 
 Try (but it is not recommended to push a large file like .fasta file directly to a github repo):
 git config http.postBuffer 524288000
+
+### Seqan3 Compiler Dependency Error upon cmake
+Use these commands to check/update your C, C++ compiler
+```
+$ gcc --version
+$ g++ --version
+$ which gcc #locate the gcc file your system is using
+$ which g++ #locate the g++ file your system is using
+$ sudo apt install gcc-12 # WARNING: seqan3 is updated regularly, and may require a different version
+$ sudo apt install g++-12 # WARNING: seqan3 is updated regularly, and may require a different version
+$ cd /usr/bin
+$ mv gcc-12 gcc # WARNING: this will overwrite your original gcc with gcc-12 and ruin all your other programs that run with original gcc, but this is guaranteed to make seqan3 work.
+$ mv g++-12 g++ # WARNING: this will overwrite your original g++ with g++-12 and ruin all your other programs that run with original gcc, but this is guaranteed to make seqan3 work.
+```
+
+### Seqan3 Unable to Locate GZIP
+```
+$ sudo install zlib1g
+```
+This installs ZLIB, but Seqan3 may still not be able to locate it properly. Direct workaround will be to unzip .fasta.gz by yourself.
+```
+$ # At the directory where your data is located
+$ gzip -d YOURFILE.fasta.gz # will generate YOURFILE.fasta
+```
+## Special Thanks & Disclaimer
+1. This repository is a fork of https://github.com/SGSSGene/ImplementingSearch, which provided helpful skeleton code for this assignment. 
+2. The dependencies stored in 'lib' subdirectory and all skeletal codes from above parent repository were accessed at the time of making this assignment (January 2024) and therefore will be possibly different from the updated version at the time of your view.
+3. C++ Implementation was partly inspired by https://github.com/mbrner/ImplementingSearch. We strongly recommend reviewing this repository, as the author there employed many interesting approaches/coding style different from the code here.
+4. The content of this repository was never endorsed by the authors of any of previosly mentioned repositories/libraries.
