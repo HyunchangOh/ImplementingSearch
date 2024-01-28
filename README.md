@@ -73,12 +73,21 @@ Of the three algorithms tested between assignments 1 and 2, the FMindex search a
 
 ## Implementation Description
 ### Naive Search
+1. Naively iterate through the target sequence.
+2. In the for-loop in 1, iterate through the substring sequence.
+3. Compare character by character.
 
 ### Suffix Search
+1. Build suffixarray sort with the help of libsufsort library.
+2. Perform binary search on the suffix array.
 
 ### Fm Index Search
+1. Construct FM index by fmindex_construct.cpp with the help of skeleton codes from SGSSGene.
+2. Perform FM index search with the help of Seqan3 Library's 'search' function. (probably why this is super fast compared to other search methods..)
 
 ### Pigeonhole Search
+1. 
+
 
 ## How to Build
 ```
