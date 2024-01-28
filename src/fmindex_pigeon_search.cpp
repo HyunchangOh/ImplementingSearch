@@ -7,7 +7,9 @@
 #include <seqan3/search/fm_index/fm_index.hpp>
 #include <seqan3/search/search.hpp>
 
+
 int main(int argc, char const* const* argv) {
+    using namespace std;
     seqan3::argument_parser parser{"fmindex_pigeon_search", argc, argv, seqan3::update_notifications::off};
 
     parser.info.author = "SeqAn-Team";
@@ -40,9 +42,10 @@ int main(int argc, char const* const* argv) {
     auto query_stream     = seqan3::sequence_file_input{query_file};
 
     // read reference into memory
-    std::vector<std::vector<seqan3::dna5>> reference;
+    std::vector<seqan3::dna5> reference;
     for (auto& record : reference_stream) {
-        reference.push_back(record.sequence());
+        auto r = record.sequence();
+        reference.insert(reference.end(), r.begin(), r.end());
     }
 
     // read query into memory
@@ -70,15 +73,52 @@ int main(int argc, char const* const* argv) {
     }
     queries.resize(number_of_queries); // will reduce the amount of searches
 
+    using std::chrono::high_resolution_clock;
+    auto start = high_resolution_clock::now();
     seqan3::configuration const cfg = seqan3::search_cfg::max_error_total{seqan3::search_cfg::error_count{0}};
     //!TODO !ImplementMe use the seqan3::search to find a partial error free hit, verify the rest inside the text
-    // Pseudo code (might be wrong):
-    // for query in queries:
-    //      parts[3] = cut_query(3, query);
-    //      for p in {0, 1, 2}:
-    //          for (pos in search(index, part[p]):
-    //              if (verify(ref, query, pos +- ....something)):
-    //                  std::cout << "found something\n"
 
+    for (auto & query : queries)
+    {
+        std::vector<std::vector<seqan3::dna5>> parts(number_of_errors+1);
+        int segment_size = (query.size() / (number_of_errors+1)) + 1;
+
+        for (int i = 0; i < query.size()-1; i++)
+        {
+            parts[i / segment_size].push_back(query[i]);
+        }
+        auto results = seqan3::search(parts, index, cfg);
+        
+        std::unordered_set<int> occurenceIndices;
+        for (auto & result : results)
+        {  
+            int start = result.reference_begin_position() - (result.query_id()*segment_size);
+            int end = start + query.size() - 1;
+            if (end < reference.size() && start >= 0) {
+                if (occurenceIndices.count(start) == 0) {
+                    std::vector<seqan3::dna5> reference_segment;
+                    for (int i = start; i < end; i++) {
+                        reference_segment.push_back(reference[i]);
+                    }
+
+                    int distance = 0;
+                    for (int i = 1; i < reference_segment.size(); i++)
+                    {
+                        if (reference_segment[i] != query[i]) {
+                            distance++;
+                        }
+                    }
+
+                    if (distance < number_of_errors)
+                    {
+                        occurenceIndices.insert(start);
+                    }
+                }
+            }
+        }
+    }
+    auto end = high_resolution_clock::now();  
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+    std::cout << "Time took: " << duration.count() << " ns\n";
     return 0;
 }
