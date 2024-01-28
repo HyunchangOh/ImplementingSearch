@@ -11,6 +11,7 @@ Visit our Repository at https://github.com/HyunchangOh/ImplementingSearch
 2. This program requires installing the library iv2py. Refer to https://pypi.org/project/iv2py/ for installation.
 
 ## How to Run
+### Python Program
 In the src_python directory, simply run "python search.py" and command-line interface will pop up.
 
 Press Enter after Welcome message.
@@ -21,6 +22,25 @@ b. Perform Task 1-5
 c. Perform small-scale search (20 queries) and displays the results
 
 Choose the task you wish to perform. All results will be printed in command line.
+
+### C++ Program
+```
+$ # We are assuming you are in the terminal/console inside the repository folder
+$ mkdir build # creates a folder for our build system
+$ cd build
+$ cmake ..    # configures our build system
+$ make        # builds our software, repeat this command to recompile your software
+
+$ ./bin/naive_search --reference ../data/hg38_partial.fasta --query ../data/illumina_reads_40.fasta --query_ct 100 # calls the code in src/naive_search.cpp
+
+$ ./bin/suffixarray_search --reference ../data/hg38_partial.fasta --query ../data/illumina_reads_40.fasta # calls the code in src/suffixarray_search.cpp
+
+$ ./bin/fmindex_construct --reference ../data/hg38_partial.fasta --index myIndex.index # creates an index, see src/fmindex_construct.cpp
+
+$ ./bin/fmindex_search --index myIndex.index --query ../data/illumina_reads_40.fasta --query_ct 100 --errors 0  # searches by using the fmindex, see src/fmindex_search.cpp
+
+$ ./bin/fmindex_pigeon_search --reference ../data/hg38_partial.fasta --index myIndex.index --query ../data/illumina_reads_40.fasta --query_ct 100 --errors 0  # searches by using the fmindex, see src/fmindex_pigeon_search.cpp
+```
 
 ## Implementation Description
 This program has two ways of search, namely: naive search and suffix search.
@@ -59,3 +79,11 @@ Naive search does not generate any additional data structures, so its memory use
 ### Computation Time
 ![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/a6964386-2e58-411c-a589-f50922a9c890)
 Of the three algorithms tested between assignments 1 and 2, the FMindex search appears to be the most efficient. One reason for this is its average-case linear time complexity. The FMindex search algorithm also uses a log-based time complexity for encoding of the test while suffix array is not log-based; this makes it faster than suffix array for individual searches. It is based on the Burrows Wheeler Transform (BWT) and suffix array. The FMindex search also has lower time requirements than naive search. The naive search does not require the same pre-processing that FMindex and suffix array require but this pre-processing step reduces downstream processing time during the search.
+
+## Troubleshooting
+### Pushing a Large File to a Github Repo
+If pushing to a github repository returns:
+fatal: the remote end hung up unexpectedly
+
+Try (but it is not recommended to push a large file like .fasta file directly to a github repo):
+git config http.postBuffer 524288000
