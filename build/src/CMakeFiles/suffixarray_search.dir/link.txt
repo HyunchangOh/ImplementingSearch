@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/suffixarray_search.dir/suffixarray_search.cpp.o  -o ../bin/suffixarray_search  -Wl,-rpath,/mnt/c/Users/hyunc/simonhelpme/build/lib ../lib/libdivsufsort.so.3.0.1 -pthread -lrt 
