@@ -83,6 +83,6 @@ int main(int argc, char const* const* argv) {
     }
     auto end = high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-    std::cout << "> Search duration: " << duration.count() << " ns\n";
+    std::cout << "Time Took: " << duration.count() << " ns\n";
     return 0;
 }

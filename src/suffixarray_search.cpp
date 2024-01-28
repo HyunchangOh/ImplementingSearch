@@ -67,11 +67,85 @@ int main(int argc, char const* const* argv) {
     //      To make the `reference` compatible with libdivsufsort you can simply
     //      cast it by calling:
     //      `sauchar_t const* str = reinterpret_cast<sauchar_t const*>(reference.data());`
+    sauchar_t const* str = reinterpret_cast<sauchar_t const*>(reference.data());
+    divsufsort(str, suffixarray.data(), reference.size());
 
+    using namespace std;
+    using std::chrono::high_resolution_clock;
+    auto start = high_resolution_clock::now();
+    
     for (auto& q : queries) {
         //!TODO !ImplementMe apply binary search and find q  in reference using binary search on `suffixarray`
         // You can choose if you want to use binary search based on "naive approach", "mlr-trick", "lcp"
-    }
+        vector<int> occurenceIndices;
 
+        int left = 0;
+        int right = reference.size() - 1;
+
+        while (left <= right) {
+            auto mid = (left + right) / 2;
+            bool equal = true;
+            for (size_t i = 0; i < q.size(); ++i) {
+                if (q[i] != reference[suffixarray[mid] + i]) {
+                    equal = false;
+                    break;
+                }
+            }
+            if (equal) {
+                occurenceIndices.push_back(left);
+                int temp = mid - 1;
+                while (temp >= 0) {
+                    bool equal_temp = true;
+                    for (size_t i = 0; i < q.size(); ++i) {
+                        if (q[i] != reference[suffixarray[temp] + i]) {
+                            equal_temp = false;
+                            break;
+                        }
+                    }
+                    if (equal_temp) {
+                        occurenceIndices.push_back(temp);
+                        temp--;
+                    } else {
+                        break;
+                    }
+                }
+                temp = mid + 1;
+                while (temp < reference.size()) {
+                    bool equal_temp = true;
+                    for (size_t i = 0; i < q.size(); ++i) {
+                        if (q[i] != reference[suffixarray[temp] + i]) {
+                            equal_temp = false;
+                            break;
+                        }
+                    }
+                    if (equal_temp) {
+                        occurenceIndices.push_back(temp);
+                        temp++;
+                    } else {
+                        break;
+                    }
+                }
+                break;
+            } else {
+                bool less = true;
+                for (size_t i = 0; i < q.size(); ++i) {
+                    if (q[i] != reference[suffixarray[mid] + i]) {
+                        if (q[i] > reference[suffixarray[mid] + i]) {
+                            less = false;
+                        }
+                        break;
+                    }
+                }
+                if (less) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+        }
+    }
+    auto end = high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+    std::cout << "Time Took: " << duration.count() << " ns\n";
     return 0;
 }
