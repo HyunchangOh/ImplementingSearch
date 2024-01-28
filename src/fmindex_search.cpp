@@ -62,6 +62,13 @@ int main(int argc, char const* const* argv) {
 
     //!TODO !ImplementMe use the seqan3::search function to search
     seqan3::configuration const cfg = seqan3::search_cfg::max_error_total{seqan3::search_cfg::error_count{number_of_errors}};
+    using namespace std;
+    using std::chrono::high_resolution_clock;
+    auto start = high_resolution_clock::now();
+    auto results = search(queries, index, cfg);
+    auto end = high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+    std::cout << "Time Took: " << duration.count() << " ns\n";
 
     return 0;
 }

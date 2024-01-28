@@ -83,63 +83,63 @@ int main(int argc, char const* const* argv) {
         int right = reference.size() - 1;
 
         while (left <= right) {
-            auto mid = (left + right) / 2;
-            bool equal = true;
-            for (size_t i = 0; i < q.size(); ++i) {
-                if (q[i] != reference[suffixarray[mid] + i]) {
-                    equal = false;
+            int middle = (left + right) / 2;
+            bool flag = true;
+            for (int i = 0; i < q.size()-1; i++) {
+                if (q[i] != reference[suffixarray[middle] + i]) {
+                    flag = false;
                     break;
                 }
             }
-            if (equal) {
+            if (flag) {
                 occurenceIndices.push_back(left);
-                int temp = mid - 1;
-                while (temp >= 0) {
-                    bool equal_temp = true;
-                    for (size_t i = 0; i < q.size(); ++i) {
-                        if (q[i] != reference[suffixarray[temp] + i]) {
-                            equal_temp = false;
+                int middle_left = middle - 1;
+                while (middle_left >= 0) {
+                    bool flag = true;
+                    for (int i = 0; i < q.size(); ++i) {
+                        if (q[i] != reference[suffixarray[middle_left] + i]) {
+                            flag = false;
                             break;
                         }
                     }
-                    if (equal_temp) {
-                        occurenceIndices.push_back(temp);
-                        temp--;
+                    if (flag) {
+                        occurenceIndices.push_back(middle_left);
+                        middle_left--;
                     } else {
                         break;
                     }
                 }
-                temp = mid + 1;
-                while (temp < reference.size()) {
-                    bool equal_temp = true;
-                    for (size_t i = 0; i < q.size(); ++i) {
-                        if (q[i] != reference[suffixarray[temp] + i]) {
-                            equal_temp = false;
+                int middle_right = middle + 1;
+                while (middle_right < reference.size()) {
+                    bool flag = true;
+                    for (int i = 0; i < q.size()-1; i++) {
+                        if (q[i] != reference[suffixarray[middle_right] + i]) {
+                            flag = false;
                             break;
                         }
                     }
-                    if (equal_temp) {
-                        occurenceIndices.push_back(temp);
-                        temp++;
+                    if (flag) {
+                        occurenceIndices.push_back(middle_right);
+                        middle_right++;
                     } else {
                         break;
                     }
                 }
                 break;
             } else {
-                bool less = true;
-                for (size_t i = 0; i < q.size(); ++i) {
-                    if (q[i] != reference[suffixarray[mid] + i]) {
-                        if (q[i] > reference[suffixarray[mid] + i]) {
-                            less = false;
+                bool flag = true;
+                for (int i = 0; i < q.size()-1; i++) {
+                    if (q[i] != reference[suffixarray[middle] + i]) {
+                        if (q[i] > reference[suffixarray[middle] + i]) {
+                            flag = false;
                         }
                         break;
                     }
                 }
-                if (less) {
-                    right = mid - 1;
+                if (flag) {
+                    right = middle - 1;
                 } else {
-                    left = mid + 1;
+                    left = middle + 1;
                 }
             }
         }
