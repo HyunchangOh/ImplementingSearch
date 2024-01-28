@@ -109,6 +109,7 @@ $ ./bin/fmindex_pigeon_search --reference ../data/hg38_partial.fasta --index myI
 ```
 ## Benchmark Comparison 
 ![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/768c040f-f6d7-422b-82a8-33830ba443dd)
+All running time measured in nanoseconds.
 1. Running time: naive > pigeonhole > fmindex > suffix array
 2. Query Substring Size: running time of naive algorithm grows linearly with substring size, logarithmically with pigeonhole, but has no impact on fmindex and suffix array search.
 3. Query Size: running time of all, but fmindex, grows linearly with query size. (presumably also grows linearly with fmindex, but fmindex was super fast that this was unmeasurable.)
