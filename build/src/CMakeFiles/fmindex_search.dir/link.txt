@@ -1,1 +1,1 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/fmindex_search.dir/fmindex_search.cpp.o  -o ../bin/fmindex_search  -pthread -lrt 
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/fmindex_search.dir/fmindex_search.cpp.o  -o ../bin/fmindex_search  -Wl,-rpath,/usr/local/lib -pthread /usr/local/lib/libz.so -lrt 

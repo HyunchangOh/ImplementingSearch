@@ -305,13 +305,13 @@ USE_OPENMP:BOOL=OFF
 WITH_LFS:BOOL=ON
 
 //Path to a file.
-ZLIB_INCLUDE_DIR:PATH=ZLIB_INCLUDE_DIR-NOTFOUND
+ZLIB_INCLUDE_DIR:PATH=/usr/local/include
 
 //Path to a library.
 ZLIB_LIBRARY_DEBUG:FILEPATH=ZLIB_LIBRARY_DEBUG-NOTFOUND
 
 //Path to a library.
-ZLIB_LIBRARY_RELEASE:FILEPATH=ZLIB_LIBRARY_RELEASE-NOTFOUND
+ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/local/lib/libz.so
 
 //Value Computed by CMake
 libdivsufsort_BINARY_DIR:STATIC=/mnt/c/Users/hyunc/simonhelpme/build/lib/libdivsufsort

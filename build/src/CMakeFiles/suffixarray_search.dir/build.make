@@ -80,6 +80,7 @@ suffixarray_search_EXTERNAL_OBJECTS =
 bin/suffixarray_search: src/CMakeFiles/suffixarray_search.dir/suffixarray_search.cpp.o
 bin/suffixarray_search: src/CMakeFiles/suffixarray_search.dir/build.make
 bin/suffixarray_search: lib/libdivsufsort.so.3.0.1
+bin/suffixarray_search: /usr/local/lib/libz.so
 bin/suffixarray_search: src/CMakeFiles/suffixarray_search.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/hyunc/simonhelpme/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/suffixarray_search"
 	cd /mnt/c/Users/hyunc/simonhelpme/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/suffixarray_search.dir/link.txt --verbose=$(VERBOSE)

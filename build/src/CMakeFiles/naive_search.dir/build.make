@@ -79,6 +79,7 @@ naive_search_EXTERNAL_OBJECTS =
 
 bin/naive_search: src/CMakeFiles/naive_search.dir/naive_search.cpp.o
 bin/naive_search: src/CMakeFiles/naive_search.dir/build.make
+bin/naive_search: /usr/local/lib/libz.so
 bin/naive_search: src/CMakeFiles/naive_search.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/hyunc/simonhelpme/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/naive_search"
 	cd /mnt/c/Users/hyunc/simonhelpme/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/naive_search.dir/link.txt --verbose=$(VERBOSE)

@@ -79,6 +79,7 @@ fmindex_search_EXTERNAL_OBJECTS =
 
 bin/fmindex_search: src/CMakeFiles/fmindex_search.dir/fmindex_search.cpp.o
 bin/fmindex_search: src/CMakeFiles/fmindex_search.dir/build.make
+bin/fmindex_search: /usr/local/lib/libz.so
 bin/fmindex_search: src/CMakeFiles/fmindex_search.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/hyunc/simonhelpme/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/fmindex_search"
 	cd /mnt/c/Users/hyunc/simonhelpme/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/fmindex_search.dir/link.txt --verbose=$(VERBOSE)

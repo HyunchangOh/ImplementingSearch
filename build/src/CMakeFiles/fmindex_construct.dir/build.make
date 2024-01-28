@@ -79,6 +79,7 @@ fmindex_construct_EXTERNAL_OBJECTS =
 
 bin/fmindex_construct: src/CMakeFiles/fmindex_construct.dir/fmindex_construct.cpp.o
 bin/fmindex_construct: src/CMakeFiles/fmindex_construct.dir/build.make
+bin/fmindex_construct: /usr/local/lib/libz.so
 bin/fmindex_construct: src/CMakeFiles/fmindex_construct.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/hyunc/simonhelpme/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/fmindex_construct"
 	cd /mnt/c/Users/hyunc/simonhelpme/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/fmindex_construct.dir/link.txt --verbose=$(VERBOSE)

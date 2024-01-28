@@ -1,1 +1,1 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/fmindex_construct.dir/fmindex_construct.cpp.o  -o ../bin/fmindex_construct  -pthread -lrt 
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/fmindex_construct.dir/fmindex_construct.cpp.o  -o ../bin/fmindex_construct  -Wl,-rpath,/usr/local/lib -pthread /usr/local/lib/libz.so -lrt 

@@ -79,6 +79,7 @@ fmindex_pigeon_search_EXTERNAL_OBJECTS =
 
 bin/fmindex_pigeon_search: src/CMakeFiles/fmindex_pigeon_search.dir/fmindex_pigeon_search.cpp.o
 bin/fmindex_pigeon_search: src/CMakeFiles/fmindex_pigeon_search.dir/build.make
+bin/fmindex_pigeon_search: /usr/local/lib/libz.so
 bin/fmindex_pigeon_search: src/CMakeFiles/fmindex_pigeon_search.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/hyunc/simonhelpme/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/fmindex_pigeon_search"
 	cd /mnt/c/Users/hyunc/simonhelpme/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/fmindex_pigeon_search.dir/link.txt --verbose=$(VERBOSE)

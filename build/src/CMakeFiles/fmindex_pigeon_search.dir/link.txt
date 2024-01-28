@@ -1,1 +1,1 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/fmindex_pigeon_search.dir/fmindex_pigeon_search.cpp.o  -o ../bin/fmindex_pigeon_search  -pthread -lrt 
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/fmindex_pigeon_search.dir/fmindex_pigeon_search.cpp.o  -o ../bin/fmindex_pigeon_search  -Wl,-rpath,/usr/local/lib -pthread /usr/local/lib/libz.so -lrt 

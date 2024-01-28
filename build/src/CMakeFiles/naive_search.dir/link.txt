@@ -1,1 +1,1 @@
-/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/naive_search.dir/naive_search.cpp.o  -o ../bin/naive_search  -pthread -lrt 
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/naive_search.dir/naive_search.cpp.o  -o ../bin/naive_search  -Wl,-rpath,/usr/local/lib -pthread /usr/local/lib/libz.so -lrt 
