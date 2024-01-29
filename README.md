@@ -58,7 +58,7 @@ For detailed use of memory-profiler library, visit https://pypi.org/project/memo
 
 
 ### Memory Usage
-![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/55784363-5bbe-4971-ab44-d01480e5e11d)
+![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/55784363-5bbe-4971-ab44-d01480e5e11d)\
 Naive search does not generate any additional data structures, so its memory use is the lowest, while Suffix Array uses significantly more memory than FM index.
 
 ### Computation Time
@@ -107,7 +107,7 @@ $ ./bin/fmindex_search --index myIndex.index --query ../data/illumina_reads_40.f
 $ ./bin/fmindex_pigeon_search --reference ../data/hg38_partial.fasta --index myIndex.index --query ../data/illumina_reads_40.fasta --query_ct 100 --errors 0  # searches by using the fmindex, see src/fmindex_pigeon_search.cpp
 ```
 ## Benchmark Comparison 
-![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/768c040f-f6d7-422b-82a8-33830ba443dd)
+![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/768c040f-f6d7-422b-82a8-33830ba443dd)\
 All running time measured in nanoseconds.
 1. Running time: naive > pigeonhole > fmindex > suffix array
 2. Query Substring Size: running time of naive algorithm grows linearly with substring size, logarithmically with pigeonhole, but has no impact on fmindex and suffix array search.
