@@ -119,8 +119,9 @@ If pushing to a github repository returns:
 fatal: the remote end hung up unexpectedly
 
 Try (but it is not recommended to push a large file like .fasta file directly to a github repo):
+```
 git config http.postBuffer 524288000
-
+```
 ### Seqan3 Compiler Dependency Error upon cmake
 Use these commands to check/update your C, C++ compiler
 ```
