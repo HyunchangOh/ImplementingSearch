@@ -155,6 +155,25 @@ This installs ZLIB, but Seqan3 may still not be able to locate it properly. Dire
 $ # At the directory where your data is located
 $ gzip -d YOURFILE.fasta.gz # will generate YOURFILE.fasta
 ```
+
+### Python Memory Profiler Doesnt work
+Errors can occur in the following lines, as memory_profiler library is meant for ipython, but not for native python.
+```
+%load_ext memory_profiler
+@profile
+```
+
+If this occurs, comment out %load_ext and add the following line at the top.
+```
+from memory_profiler import profile
+```
+
+Of course you need to install memory_profiler to make this all work.
+```
+$ pip install memory-profiler
+```
+
+
 ## Special Thanks & Disclaimer
 1. This repository is a fork of https://github.com/SGSSGene/ImplementingSearch, which provided helpful skeleton code for this assignment. 
 2. The dependencies stored in 'lib' subdirectory and all skeletal codes from above parent repository were accessed at the time of making this assignment (January 2024) and therefore will be possibly different from the updated version at the time of your view.
