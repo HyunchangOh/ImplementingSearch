@@ -53,7 +53,6 @@ For the query size of 1000,
 Suffix array search took 343.96045565605164 seconds, among which 7.536531209945679 seconds were used for array construction.
 Naive Search took 222.48520278930664 seconds.
 
-## Time and Memory Usage Comparison
 For query size of 10,100,1000, the memory usage and computation time of each search method was compared, using python's native time library for computation time and memory-profiler for memory usage.
 For detailed use of memory-profiler library, visit https://pypi.org/project/memory-profiler/
 
