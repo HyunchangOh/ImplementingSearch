@@ -7,6 +7,7 @@ This is an exercise to demonstrate the power of Suffix-Array and FM-Index based 
 Visit our Repository at https://github.com/HyunchangOh/ImplementingSearch
 
 This implementation was developed and tested on WSL(Ubuntu) on Windows 10. 
+If you don't have a Linux machine and wish to try WSL on Windows, see Troubleshooting.
 
 # Python Implementation
 C++ follows below.
@@ -59,7 +60,7 @@ Both searches make use of the 'single' version of their own (suffix_search_singl
 ![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/4499b395-5075-454a-a66e-ff517032d648)
 
 
-For query size of 10,100,1000, the memory usage and computation time of each search method was compared, using python's native time library for computation time and memory-profiler for memory usage.
+For query size of 10,100,1000, with the query substring size 100, the memory usage and computation time of each search method was compared, using python's native time library for computation time and memory-profiler for memory usage.
 For detailed use of memory-profiler library, visit https://pypi.org/project/memory-profiler/. Memory is in MB and time is in seconds.
 
 
@@ -120,7 +121,7 @@ $ ./bin/fmindex_pigeon_search --reference ../data/hg38_partial.fasta --index myI
 All running time measured in nanoseconds.
 1. Running time: naive > pigeonhole > fmindex > suffix array
 2. Query Substring Size: running time of naive algorithm grows linearly with substring size, logarithmically with pigeonhole, but has no impact on fmindex and suffix array search.
-3. Query Size: running time of all, but fmindex, grows linearly with query size. (presumably also grows linearly with fmindex, but fmindex was super fast that this was unmeasurable.)
+3. Query Size: running time of all, but fmindex, grows linearly with query size. (presumably also grows linearly with fmindex, but fmindex was super fast that this was unmeasurable.)\
 Note that analysis of C++ algorithm was done in a manner to explore a different aspect than its Python counterpart, but all other functions, such as changing allowed maximum error in C++ or changing query substring size in Python are all implemented and available for more exploration.
 
 ## Troubleshooting
@@ -173,6 +174,23 @@ Of course you need to install memory_profiler to make this all work.
 $ pip install memory-profiler
 ```
 
+### I don't have Linux, I only have Windows
+Two ways to do this:
+1. Use VMWare to make a Linux virtual machine
+2. Use WSL (Windows Subsystems for Linux) on windows.\
+
+Press Ctrl+R to open cmd. type 'wsl.exe' to launch wsl.
+By using the following commands, make and navigate to your work directory.
+```
+$ mkdir DIRNAME # make a new subdirectory named DIRNAME
+$ cd DIRNAME # change directory to DIRNAME
+```
+
+If you are not an expert in VIM, we recommend you to use a code editor like Visual Studio Code. To do this:
+1. Install Visual Studio Code (different from Visual Studio) on the Windows side (not on the WSL side)
+2. Install the WSL Extension on visual studio code.
+3. Type "code ." in your cmd that is inside your working directory of your WSL.\
+https://code.visualstudio.com/docs/remote/wsl gives a more detailed information if you run into problems.
 
 ## Special Thanks & Disclaimer
 1. This repository is a fork of https://github.com/SGSSGene/ImplementingSearch, which provided helpful skeleton code for this assignment. 
