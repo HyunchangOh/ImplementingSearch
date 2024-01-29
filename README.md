@@ -121,6 +121,7 @@ All running time measured in nanoseconds.
 1. Running time: naive > pigeonhole > fmindex > suffix array
 2. Query Substring Size: running time of naive algorithm grows linearly with substring size, logarithmically with pigeonhole, but has no impact on fmindex and suffix array search.
 3. Query Size: running time of all, but fmindex, grows linearly with query size. (presumably also grows linearly with fmindex, but fmindex was super fast that this was unmeasurable.)
+Note that analysis of C++ algorithm was done in a manner to explore a different aspect than its Python counterpart, but all other functions, such as changing allowed maximum error in C++ or changing query substring size in Python are all implemented and available for more exploration.
 
 ## Troubleshooting
 ### Pushing a Large File to a Github Repo
