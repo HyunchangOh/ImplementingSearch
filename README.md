@@ -48,6 +48,13 @@ Both searches make use of the 'single' version of their own (suffix_search_singl
 1. Construct Fm Index with iv2py library.
 2. Perform search and reorganize format to comply with other search implementations.
 
+### Pigeonhole search
+1. Build fm index for future searches.
+2. Split substring into error+1 parts.
+3. Search for parts individually with fm index based search.
+4. Verify each hit individually by looking at the hit position in the text and comparing the rest of the text with the substring.
+5. Save verified positions, allowing for the determined number of errors. Delete duplicate positions.
+
 ## Benchmark Comparison
 For the query size of 1000,
 Suffix array search took 343.96045565605164 seconds, among which 7.536531209945679 seconds were used for array construction.
@@ -86,7 +93,11 @@ Of the three algorithms tested between assignments 1 and 2, the FMindex search a
 2. Perform FM index search with the help of Seqan3 Library's 'search' function. (probably why this is super fast compared to other search methods..)
 
 ### Pigeonhole Search
-1. 
+1. Build fm index for future searches.
+2. Split substring into error+1 parts.
+3. Search for parts individually with fm index based search.
+4. Verify each hit individually by looking at the hit position in the text and comparing the rest of the text with the substring.
+5. Save verified positions, allowing for the determined number of errors. Delete duplicate positions.
 
 
 ## How to Build
