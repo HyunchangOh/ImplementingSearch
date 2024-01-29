@@ -60,17 +60,16 @@ For the query size of 1000,
 Suffix array search took 343.96045565605164 seconds, among which 7.536531209945679 seconds were used for array construction.
 Naive Search took 222.48520278930664 seconds.
 
-## Time and Memory Usage Comparison
 For query size of 10,100,1000, the memory usage and computation time of each search method was compared, using python's native time library for computation time and memory-profiler for memory usage.
 For detailed use of memory-profiler library, visit https://pypi.org/project/memory-profiler/
 
 
 ### Memory Usage
-![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/55784363-5bbe-4971-ab44-d01480e5e11d)
+![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/55784363-5bbe-4971-ab44-d01480e5e11d)\
 Naive search does not generate any additional data structures, so its memory use is the lowest, while Suffix Array uses significantly more memory than FM index.
 
 ### Computation Time
-![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/a6964386-2e58-411c-a589-f50922a9c890)
+![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/a6964386-2e58-411c-a589-f50922a9c890)\
 Of the three algorithms tested between assignments 1 and 2, the FMindex search appears to be the most efficient. One reason for this is its average-case linear time complexity. The FMindex search algorithm also uses a log-based time complexity for encoding of the test while suffix array is not log-based; this makes it faster than suffix array for individual searches. It is based on the Burrows Wheeler Transform (BWT) and suffix array. The FMindex search also has lower time requirements than naive search. The naive search does not require the same pre-processing that FMindex and suffix array require but this pre-processing step reduces downstream processing time during the search.
 
 # C++ Program
@@ -118,6 +117,12 @@ $ ./bin/fmindex_search --index myIndex.index --query ../data/illumina_reads_40.f
 
 $ ./bin/fmindex_pigeon_search --reference ../data/hg38_partial.fasta --index myIndex.index --query ../data/illumina_reads_40.fasta --query_ct 100 --errors 0  # searches by using the fmindex, see src/fmindex_pigeon_search.cpp
 ```
+## Benchmark Comparison 
+![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/768c040f-f6d7-422b-82a8-33830ba443dd)\
+All running time measured in nanoseconds.
+1. Running time: naive > pigeonhole > fmindex > suffix array
+2. Query Substring Size: running time of naive algorithm grows linearly with substring size, logarithmically with pigeonhole, but has no impact on fmindex and suffix array search.
+3. Query Size: running time of all, but fmindex, grows linearly with query size. (presumably also grows linearly with fmindex, but fmindex was super fast that this was unmeasurable.)
 
 ## Troubleshooting
 ### Pushing a Large File to a Github Repo
@@ -125,8 +130,9 @@ If pushing to a github repository returns:
 fatal: the remote end hung up unexpectedly
 
 Try (but it is not recommended to push a large file like .fasta file directly to a github repo):
+```
 git config http.postBuffer 524288000
-
+```
 ### Seqan3 Compiler Dependency Error upon cmake
 Use these commands to check/update your C, C++ compiler
 ```
