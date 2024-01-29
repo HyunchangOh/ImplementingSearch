@@ -62,7 +62,7 @@ For detailed use of memory-profiler library, visit https://pypi.org/project/memo
 Naive search does not generate any additional data structures, so its memory use is the lowest, while Suffix Array uses significantly more memory than FM index.
 
 ### Computation Time
-![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/a6964386-2e58-411c-a589-f50922a9c890)
+![image](https://github.com/HyunchangOh/ImplementingSearch/assets/42934606/a6964386-2e58-411c-a589-f50922a9c890)\
 Of the three algorithms tested between assignments 1 and 2, the FMindex search appears to be the most efficient. One reason for this is its average-case linear time complexity. The FMindex search algorithm also uses a log-based time complexity for encoding of the test while suffix array is not log-based; this makes it faster than suffix array for individual searches. It is based on the Burrows Wheeler Transform (BWT) and suffix array. The FMindex search also has lower time requirements than naive search. The naive search does not require the same pre-processing that FMindex and suffix array require but this pre-processing step reduces downstream processing time during the search.
 
 # C++ Program
